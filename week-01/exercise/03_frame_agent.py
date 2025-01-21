@@ -10,6 +10,7 @@ from enum import Enum
 class Weather(Enum):
     RAINY = "rainy"
     SUNNY = "sunny"
+    MILD = "mild"
 
 
 class Mood(Enum):
@@ -71,6 +72,10 @@ def recommend_activity(frame: Frame) -> None:
             print("You should go indoor climbing!")
         case Frame(weather="rainy", mood="chill"):
             print("You should watch a movie!")
+        case Frame(weather="mild", mood="active"):
+            print("You should go play bowling!")
+        case Frame(weather="mild", mood="chill"):
+            print("You should go eat good food!")
         case _:
             raise ValueError(f"Frame is not fully specified: {frame}")
 
@@ -90,10 +95,10 @@ if __name__ == "__main__":
         # Otherwise, ask the user for input.
         if action == Action.ASK_ALL:
             # Implement this part!!! Edit the weather options.
-            response = input("What's the weather like? What's your mood? (weather:rainy|sunny; mood:active|chill) ")
+            response = input("What's the weather like? What's your mood? (weather:rainy|sunny|mild; mood:active|chill) ")
         elif action == Action.ASK_WEATHER:
             # Implement this part!!! Edit the weather options.
-            response = input("What's the weather like? (weather:rainy|sunny) ")
+            response = input("What's the weather like? (weather:rainy|sunny|mild) ")
         elif action == Action.ASK_MOOD:
             response = input("What's your mood? (mood:active|chill) ")
         else:

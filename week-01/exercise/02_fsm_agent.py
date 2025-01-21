@@ -26,7 +26,8 @@ class WeatherState(State):
             return Transition(self, MoodState(), event)
         else:
             # Implement this part!!!
-            raise NotImplementedError("Implement a transition to AskRainingState")
+            return Transition(self, AskRainingState(), event)
+            # raise NotImplementedError("Implement a transition to AskRainingState")
 
 
     def run(self) -> Output:
@@ -40,10 +41,12 @@ class AskRainingState(State):
     def next(self, event: Event) -> Transition:
         if event.type == "YesNo" and event.value in ["yes", "no"]:
             # Implement this part!!!
-            raise NotImplementedError("Implement a transition to MoodState")
+            return Transition(self, MoodState(), event)
+            # raise NotImplementedError("Implement a transition to MoodState")
         else:
             # Implement this part!!!
-            raise NotImplementedError("Implement a transition to AskRainingState")
+            return Transition(self, AskRainingState(), event)
+            # raise NotImplementedError("Implement a transition to AskRainingState")
 
     def run(self) -> Output:
         return Output(self, f"Running AskRainingState")
@@ -94,8 +97,7 @@ class StateMachine:
 
         if transition.event is not None:
             print(f"Transition from {transition.source} to {transition.target}")
-            # Implement this part!!!
-            raise NotImplementedError("Handle the YesNo event appropriately")
+            # Implement this part!!!            
             self.parameters[transition.event.type] = transition.event.value
 
         self.state = transition.target
@@ -137,7 +139,9 @@ if __name__ == "__main__":
             input_event = Event("Mood", event_value)
         elif isinstance(sm.state, AskRainingState):
             # Implement this part!!!
-            raise NotImplementedError("Handle the YesNo event")
+            # raise NotImplementedError("Handle the YesNo event")
+            event_value = input("Is it raining (yes | no): ")
+            input_event = Event("AskRaining", event_value)
         elif isinstance(sm.state, TerminalState):
             break
         else:
